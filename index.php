@@ -1,10 +1,60 @@
 <?php
 
-$_SESSION
+include('Model/connexionDB.php');
+include('controller/MembreController.php');
 
-include('Model/Model.php');
+$menbreController = new MembreController();
 
 //requête transaction
+
+if (!empty($_POST['loginSubmit']))
+{
+    $userMail=$_POST['mail'];
+    $pwd=$_POST['pwd'];
+    if(strlen(trim($userMail))>1 && strlen(trim($pwd))>1 )
+    {
+        $membreId=$menbreController->userLogin($userMail,$pwd);
+
+        if($membreId)
+        {
+            $url=BASE_URL.'index.php';
+            header("Location: $url"); // Page redirecting to home.php
+        }
+        else
+        {
+            $errorMsgLogin="email ou mot de passe ne correspond pas";
+        }
+    }
+}
+
+
+
+
+if (!empty($_POST['registration']))
+{
+    $nom=$_POST['nom'];
+    $dateN=$_POST['dateN'];
+    $mail=$_POST['email'];
+    $pwd=$_POST['pwd'];
+    /* Regular expression check */
+    $username_check = preg_match('~^[A-Za-z0-9_]{3,20}$~i', $nom);
+    $email_check = preg_match('~^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$~i', $mail);
+    $password_check = preg_match('~^[A-Za-z0-9!@#$%^&*()_]{6,20}$~i', $pwd);
+
+    if($username_check && $email_check && $password_check && strlen(trim($nom))>0)
+    {
+        $membreId=$menbreController->userRegistration($nom,$dateN,$mail,$pwd);
+        if($membreId)
+        {
+            $url=BASE_URL.'login.php';
+            header("Location: $url"); // Page redirecting to home.php
+        }
+        else
+        {
+            $errorMsgReg="Username or Email already exists.";
+        }
+    }
+}
 
 
 ?>
@@ -30,13 +80,13 @@ include('Model/Model.php');
 <body>
 <?php
 include('view/header.php');
-
+$db = getDB();
 $maxSaison = 2015;
 $equipeId1 = 14;
 $equipeId2 = 156;
 $compId = 530;
 
-$reqMaxJr = $pdo->prepare("SELECT DISTINCT MAX(class_nm)
+$reqMaxJr = $db->prepare("SELECT DISTINCT MAX(class_nm)
               FROM classement
               WHERE class_saison_debut = '$maxSaison' ");
 
@@ -49,7 +99,7 @@ $max_jr = $tab_max_jr[0][0];
 
 echo " <script> var journee = $max_jr  </script>";
 
-$reqNbEq= $pdo->prepare("SELECT DISTINCT comp_nb_equipe as nbEquipe
+$reqNbEq= $db->prepare("SELECT DISTINCT comp_nb_equipe as nbEquipe
               FROM competition
               WHERE comp_id = '$compId' ");
 
@@ -86,7 +136,7 @@ if(isset($_POST['tran_code']) && $_POST['tran_code']!='') {
 
 //    var_dump($_POST['tran_code']);
     $transaction = $_POST['tran_code'];
-    $req_tran = $pdo->prepare("SELECT DISTINCT tran_id, tran_page, tran_dossier
+    $req_tran = $db->prepare("SELECT DISTINCT tran_id, tran_page, tran_dossier
               FROM transaction
               WHERE tran_code = '$transaction'");
     $req_tran->execute();
@@ -103,7 +153,7 @@ else
 
 }
 
-echo "</div>";
+echo "ffffff </div>";
 
 
 include('view/footer.php')

@@ -1,25 +1,28 @@
 <?php
-session_start()
+
+
+
+
+
 ?>
 <div class="wrapper">
-    <form action="/login.php" method="POST" class="form-signin">
-        <h2 class="form-signin-heading">Connectez-vous</h2>
+    <form action="" method="POST" class="form-signin" name="login">
+        <h2 class="form-signin-heading-center">Connectez-vous</h2>
         <input type="text" class="form-control" name="mail" placeholder="Email Address" required=""  />
         <input type="password" class="form-control" name="pwd" placeholder="Mot de Passe" required=""/>
         <label class="checkbox">
             <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Se Connecter</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginSubmit">Se Connecter</button> </form>
         <form name='form_ind07' action='' method='post'>  <button class="btn btn-lg btn-default btn-block" type="submit">Créer un compte</button><input type="hidden" name="tran_code" value="ind07"></form>
-    </form>
 </div>
 
 <?php
 
-if ($_POST['submit']){
-
-
-}
+//if ($_POST['submit']){
+//
+//
+//}
 
 
 ?>

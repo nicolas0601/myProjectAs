@@ -38,7 +38,7 @@
 //var_dump('</pre>');*/
 
 
-$reqMaxJr = $pdo->prepare("SELECT DISTINCT MAX(class_nm)
+$reqMaxJr = $db->prepare("SELECT DISTINCT MAX(class_nm)
               FROM classement
               WHERE class_saison_debut = '$maxSaison' ");
 
@@ -50,7 +50,7 @@ $tab_max_jr = $reqMaxJr->fetchAll();
 $max_jr = $tab_max_jr[0][0];
 //    var_dump($max_jr);
 //DISTINCT éviter les doublons
-$reqClassG = $pdo->prepare("SELECT DISTINCT co.comp_nom as comp, m.nom as equipe, class_nm as journee, class_saison_debut as debut, class_saison_fin as fin, 
+$reqClassG = $db->prepare("SELECT DISTINCT co.comp_nom as comp, m.nom as equipe, class_nm as journee, class_saison_debut as debut, class_saison_fin as fin, 
             class_competition as competition, class_discipline as football, class_nb_point as point, class_rang as rang,
              class_resultat as buts,class_concede as be,(class_resultat-class_concede) as df, class_nb_victoire as V, class_nb_nul as N,class_nb_defaite as D 
              FROM classement c
@@ -81,7 +81,7 @@ $classements = $reqClassG->fetchAll(PDO::FETCH_ASSOC);
 
 $reqClassG->closeCursor();
 
-$req2 = $pdo->prepare("SELECT DISTINCT  m.nom as equipe, 
+$req2 = $db->prepare("SELECT DISTINCT  m.nom as equipe, 
              class_nb_point as point, class_rang as rang,
               class_nb_victoire as v, class_nb_nul as n,class_nb_defaite as d FROM classement c
              INNER JOIN membre m ON m.identifiant = c.class_equipe 

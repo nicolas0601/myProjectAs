@@ -40,7 +40,7 @@
 
 
             <div class="col-sm-2" id="logo">
-                <img class=img-responsive  src="/public/images/logoasmoza.png">
+                <img class=img-responsive  src="../public/images/logoasmoza.png">
             </div>
 
             <div class="col-sm-4" id="slogan">

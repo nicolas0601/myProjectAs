@@ -1,6 +1,6 @@
 <?php
 
-$reqMatch = $pdo->prepare("SELECT DISTINCT m.nom as equipe,  renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
+$reqMatch = $db->prepare("SELECT DISTINCT m.nom as equipe,  renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
                             renc_date_rencontre as dateMatch
                             FROM rencontre r
                             INNER JOIN membre m ON m.identifiant = r.renc_equipe_a
@@ -41,7 +41,7 @@ $matchEq2 = $reqMatch->fetchAll();
 $reqMatch->closeCursor();
 
 // requete résultat des 5 derniers matchs
-$reqLastFive = $pdo->prepare("SELECT DISTINCT renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
+$reqLastFive = $db->prepare("SELECT DISTINCT renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
                             renc_date_rencontre as dateMatch 
                             FROM rencontre r 
                             WHERE r.renc_equipe_a = ? OR  r.renc_equipe_b = ?
@@ -82,7 +82,7 @@ $reqLastFive->closeCursor();
 
 //
 
-$reqFF = $pdo->prepare("SELECT DISTINCT class_equipe as equipe, class_nm as journee,
+$reqFF = $db->prepare("SELECT DISTINCT class_equipe as equipe, class_nm as journee,
              class_rang as rang
              FROM classement c
              INNER JOIN membre m ON m.identifiant = c.class_equipe

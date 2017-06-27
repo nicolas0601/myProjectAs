@@ -2,7 +2,7 @@
 
 
 
-    $reqMaxJr = $pdo->prepare("SELECT DISTINCT MAX(class_nm)
+    $reqMaxJr = $db->prepare("SELECT DISTINCT MAX(class_nm)
               FROM classement
               WHERE class_saison_debut = '$maxSaison' ");
 
@@ -14,7 +14,7 @@
     $max_jr = $tab_max_jr[0][0];
 //    var_dump($max_jr);
     //DISTINCT éviter les doublons
-    $reqClassG = $pdo->prepare("SELECT DISTINCT co.comp_nom as comp, m.nom as equipe, class_nm as journee, class_saison_debut as debut, class_saison_fin as fin, 
+    $reqClassG = $db->prepare("SELECT DISTINCT co.comp_nom as comp, m.nom as equipe, class_nm as journee, class_saison_debut as debut, class_saison_fin as fin, 
             class_competition as competition, class_discipline as football, class_nb_point as point, class_rang as rang,
              class_resultat as buts,class_concede as be,(class_resultat-class_concede) as df, class_nb_victoire as V, class_nb_nul as N,class_nb_defaite as D 
              FROM classement c
@@ -45,7 +45,7 @@
 
     $reqClassG->closeCursor();
 
-$reqMatch = $pdo->prepare("SELECT DISTINCT renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
+$reqMatch = $db->prepare("SELECT DISTINCT renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
                             renc_date_rencontre as dateMatch
                             FROM rencontre r
                             INNER JOIN membre m ON m.identifiant = r.renc_equipe_a

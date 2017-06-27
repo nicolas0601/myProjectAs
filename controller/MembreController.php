@@ -1,6 +1,6 @@
 <?php
-include('../Model/Model.php');
-include('../entity/Membre.php');
+//include('../Model/connexionDB.php');
+//include('../entity/Membre.php');
 //namespace Model;
 /*.*.
  * Created by PhpStorm.
@@ -20,69 +20,78 @@ include('../entity/Membre.php');
 //    }
 
 
-class MembreController{
-
-private $db;
-
-fucntion function __construct($pdo)
+class MembreController
 {
-   $this->db = $pdo;
+
+    public function userLogin($userMail, $pwd)
+    {
+
+        try {
+
+            $db = getDB();
+
+            $hash_password = hash('sha256', $pwd); //Password encryption
+            $stmt = $db->prepare("SELECT identifiant From membre WHERE mail=:userMail and mPasse=:hash_password
+         ");
+            $stmt->bindParam("userEmail", $userMail, PDO::PARAM_STR);
+            $stmt->bindParam("hash_password", $hash_password, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $count = $stmt->rowCount();
+            $data = $stmt->fetch(PDO::FETCH_OBJ);
+            $db = null;
+            if ($count) {
+                $_SESSION['identifiant'] = $data->identifiant; // Storing user session value
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo '{"error":{"text":' . $e->getMessage() . '}}';
+        }
+    }
+
+
+    public function userRegistration($nom, $dateN,$mail, $pwd)
+    {
+        try{
+            $db = getDB();
+            $st = $db->prepare("SELECT identifiant FROM membre WHERE mail=:mail");
+            $st->bindParam("mail", $mail,PDO::PARAM_STR);
+            $st->execute();
+            $count=$st->rowCount();
+            if($count<1)
+            {
+                $stmt = $db->prepare("INSERT INTO membre(nom,dateN,mail,mPasse) VALUES (:nom, :dateN, :email,:hash_password)");
+                $stmt->bindParam("nom", $nom) ;
+                $stmt->bindParam("dateN", $dateN) ;
+                $stmt->bindParam("mail", $mail) ;
+                $hash_password= hash('sha256', $pwd); //Password encryption
+                $stmt->bindParam("hash_password", $hash_password) ;
+                $stmt->execute();
+                $membreId=$db->lastInsertId(); // Last inserted row id
+                $db = null;
+                $_SESSION['identifiant']=$membreId;
+                return true;
+            }
+            else
+            {
+                $db = null;
+                return false;
+            }
+
+        }
+        catch(PDOException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
+    }
+
+
+
+
 }
 
-public function create($nom; $mail $mPasse)
-
-//
-//    public function insert(Membre $membre)
-//    {
-//        $stmt = $this->conn->prepare("INSERT INTO membre (nom,dateN, mail, mPasse,) VALUES (:nom, :dateN :mail, :mPasse)");
-//        $stmt->bindParam(':nom', $nom);
-//        $stmt->bindParam(':dateN', $nom);
-//        $stmt->bindParam(':mail', $mail);
-//        $stmt->bindParam(':mPasse', $mPasse);
-//
-//        $nom = $membre->getNom();
-//        $dateN = $membre->getDateN();
-//        $mail = $membre->getMail();
-//        $mPasse = $membre->getMPasse();
-//
-//        try {
-//            $stmt->execute();
-//
-//            $membre->setIdentifiant($this->conn->lastInsertId());
-//
-//            return $membre;
-//        } catch (\Exception $e) {
-//            return null;
-//        }
 
 
 
-
-
-
-
-
-
-
-//    public function create($fname,$lname,$email,$contact)
-//    {
-//        try
-//        {
-//            $stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,contact_no)
-//            VALUES(:fname, :lname, :email, :contact)");
-//            $stmt->bindparam(":fname",$fname);
-//            $stmt->bindparam(":lname",$lname);
-//            $stmt->bindparam(":email",$email);
-//            $stmt->bindparam(":contact",$contact);
-//            $stmt->execute();
-//            return true;
-//        }
-//        catch(PDOException $e)
-//        {
-//            echo $e->getMessage();
-//            return false;
-//        }
-//
-//    }
-
-}

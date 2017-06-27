@@ -1,59 +1,59 @@
 <?php
 
-include('Model/Model.php');
-
-session_start();
-
-if (empty($_POST['mail'])
-    || empty($_POST['pwd'])
-) {
-    $_SESSION['message'] = "Tous les champs sont obligatoires !";
-
-    header('Location: login.php');
-    exit();
-}
-
-
-
-//try {
-//    $pdo = new PDO($pdo, $params['login'], $params['pwd']);
-//    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//} catch (PDOException $e) {
-//    echo $e->getMessage();
+//include('Model/connexionDB.php');
+//
+//session_start();
+//
+//if (empty($_POST['mail'])
+//    || empty($_POST['pwd'])
+//) {
+//    $_SESSION['message'] = "Tous les champs sont obligatoires !";
+//
+//    header('Location: login.php');
+//    exit();
 //}
-
-
-$stmt = $pdo->prepare("SELECT * FROM membre WHERE mail = :email");
-$stmt->bindParam(':email', $mail);
-
-$mail = $_POST['mail'];
-
-try {
-    $stmt->execute();
-} catch (PDOException $e) {
-    $_SESSION['message'] = "Unexpected error occurred !";
-    header('Location: login.php');
-    die;
-}
-
-$user = null;
-
-while ($row = $stmt->fetch()) {
-    if($row['mPasse'] === $_POST['pwd']) {
-        $user = $row;
-    }
-}
-
-if(!empty($user)) {
-    $user['pwd'] = null;
-
-    $_SESSION['user'] = $user;
-
-    header("Location: index.php");
-} else {
-    $_SESSION['message'] = "Bad credentials !";
-    header('Location: login.php');
-}
+//
+//
+//
+////try {
+////    $pdo = new PDO($pdo, $params['login'], $params['pwd']);
+////    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+////} catch (PDOException $e) {
+////    echo $e->getMessage();
+////}
+//
+//
+//$stmt = $pdo->prepare("SELECT * FROM membre WHERE mail = :email");
+//$stmt->bindParam(':email', $mail);
+//
+//$mail = $_POST['mail'];
+//
+//try {
+//    $stmt->execute();
+//} catch (PDOException $e) {
+//    $_SESSION['message'] = "Unexpected error occurred !";
+//    header('Location: login.php');
+//    die;
+//}
+//
+//$user = null;
+//
+//while ($row = $stmt->fetch()) {
+//    if($row['mPasse'] === $_POST['pwd']) {
+//        $user = $row;
+//    }
+//}
+//
+//if(!empty($user)) {
+//    $user['pwd'] = null;
+//
+//    $_SESSION['user'] = $user;
+//
+//    header("Location: index.php");
+//} else {
+//    $_SESSION['message'] = "Bad credentials !";
+//    header('Location: login.php');
+//}
 
 //requête transaction
 
