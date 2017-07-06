@@ -1,7 +1,7 @@
 <?php
 if(!empty($_SESSION['identifiant']))
 {
-    $session_membreId=$_SESSION['uid'];
+    $session_membreId=$_SESSION['identifiant'];
     include('controller/MembreController.php');
     $membreClass = new MembreController();
 }

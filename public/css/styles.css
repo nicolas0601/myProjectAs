@@ -3,7 +3,7 @@ body {
 
     padding-top: 0;
     padding-bottom: 20px;
-    background-color: lightgrey;
+    background-color: white;
 }
 
 /*HEADER CSS*/
@@ -25,6 +25,7 @@ body {
 }
 
 #logo{
+    width: 100px;
     margin-top:30px;
 }
 
@@ -36,7 +37,7 @@ body {
     margin: 0 auto;
     margin-top: 10px;
     padding-bottom:100px;
-    background-color: lightgrey;
+    background-color: white;
 
 }
 
@@ -84,6 +85,8 @@ ul .navbar-nav{
 /*background-color: #f7f904;*/
 /*}*/
 
+
+
 footer p {
     color:white;
 }
@@ -128,7 +131,8 @@ footer .navbar-fixed-bottom {
 
 /*LOGIN CSS*/
 .wrapper {
-    background-color: lightgrey;
+
+    background-color: white;
 
     margin-top: 20px;
     margin-bottom: 20px;
@@ -172,4 +176,44 @@ input[type="password"] {
 }
 
 
+/*  PROFIL CSS*/
 
+.box{
+    background-color: #008080;
+    width:700px;
+    margin:0 auto;
+    height:400px;
+    margin-bottom: 10px;
+}
+
+.floatLeft{
+    width:300px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #008080;
+    border-radius: 0.3em;
+    float: left;
+    /*display: inline-block;*/
+}
+
+#floatRight{
+    width:400px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #008080;
+    border-radius: 0.3em;
+
+    float: right;
+}
+
+
+.profil h3{
+    color: dodgerblue;
+    font-weight:bolder ;
+    text-align: center
+}
+
+#btnModi{
+
+    float: right;
+}

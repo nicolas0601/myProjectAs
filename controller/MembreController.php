@@ -1,97 +1,95 @@
 <?php
-//include('../Model/connexionDB.php');
-//include('../entity/Membre.php');
-//namespace Model;
-/*.*.
- * Created by PhpStorm.
- * User: PC Dell
- * Date: 21/06/2017
- * Time: 10:54
- */
-//class MembreController
-//{
-//    private $conn;
-//
-//    function __construct($cont)
-//    {
-//        $database = new Model();
-//        $db = $database->getBdd();
-//        $this->conn = $db;
-//    }
+session_start();
+require_once('../entity/MembreDAO.php');
+// create
 
+if (isset($_POST['registration'])) {
 
-class MembreController
-{
+    unset($_POST['registration']);
+    userRegistration($_POST);
 
-    public function userLogin($userMail, $pwd)
-    {
+    if (isset($_SESSION['identifiant'])) {
+        header('Location: ../index.php');
+        exit;
+    } else {
+        header('Location: ../register.php');
+        exit;
+    }
+}
 
-        try {
+// read login
+if (isset($_POST['login'], $_POST['mail'], $_POST['pwd'])
+    && !empty($_POST['mail']) && !empty($_POST['pwd'])
+) {
+//    var_dump($_POST);
+    $userMail = $_POST['mail'];
+    $pwd = $_POST['pwd'];
 
-            $db = getDB();
+    userLogin($userMail, $pwd);
 
-            $hash_password = hash('sha256', $pwd); //Password encryption
-            $stmt = $db->prepare("SELECT identifiant From membre WHERE mail=:userMail and mPasse=:hash_password
-         ");
-            $stmt->bindParam("userEmail", $userMail, PDO::PARAM_STR);
-            $stmt->bindParam("hash_password", $hash_password, PDO::PARAM_STR);
+    if (isset($_SESSION['identifiant'])) {
 
-            $stmt->execute();
-
-            $count = $stmt->rowCount();
-            $data = $stmt->fetch(PDO::FETCH_OBJ);
-            $db = null;
-            if ($count) {
-                $_SESSION['identifiant'] = $data->identifiant; // Storing user session value
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e) {
-            echo '{"error":{"text":' . $e->getMessage() . '}}';
-        }
+        header('Location: ../index.php');
+        exit;
+    } else {
+        header('Location: ../login.php');
+        exit;
     }
 
+}
 
-    public function userRegistration($nom, $dateN,$mail, $pwd)
-    {
-        try{
-            $db = getDB();
-            $st = $db->prepare("SELECT identifiant FROM membre WHERE mail=:mail");
-            $st->bindParam("mail", $mail,PDO::PARAM_STR);
-            $st->execute();
-            $count=$st->rowCount();
-            if($count<1)
-            {
-                $stmt = $db->prepare("INSERT INTO membre(nom,dateN,mail,mPasse) VALUES (:nom, :dateN, :email,:hash_password)");
-                $stmt->bindParam("nom", $nom) ;
-                $stmt->bindParam("dateN", $dateN) ;
-                $stmt->bindParam("mail", $mail) ;
-                $hash_password= hash('sha256', $pwd); //Password encryption
-                $stmt->bindParam("hash_password", $hash_password) ;
-                $stmt->execute();
-                $membreId=$db->lastInsertId(); // Last inserted row id
-                $db = null;
-                $_SESSION['identifiant']=$membreId;
-                return true;
-            }
-            else
-            {
-                $db = null;
-                return false;
-            }
+// read profile
+if (isset($_POST['profile'])) {
 
-        }
-        catch(PDOException $e) {
-            echo '{"error":{"text":'. $e->getMessage() .'}}';
-        }
-    }
-
-
-
-
+    membreInfo($_SESSION['identifiant']);
+    header('Location: ../profile.php');
+    exit;
 }
 
 
 
+//update
+if (isset($_POST['updateProfile']) ) {
 
+    unset($_POST['updateProfile']);
+
+
+
+    userUpdate($_POST);
+
+    if ($_SESSION['update'] === 'ok') {
+        header('Location: ../index.php'); //?? to which page ??
+        exit;
+    } else {
+        header('Location: ../profile.php');
+        exit;
+    }
+}
+
+//
+//if (isset($_POST['updateProfile2'])) {
+//
+//    unset($_POST['updateProfile2']);
+//
+//    userUpdate2($_POST);
+//
+//    if ($_SESSION['update'] === 'ok') {
+//        header('Location: ../index.php'); //?? to which page ??
+//        exit;
+//    } else {
+//        header('Location: ../profile.php');
+//        exit;
+//    }
+//}
+
+
+
+if (isset($_POST['logout'])) {
+
+    logout();
+    header('Location: ../login.php');
+    exit;
+}
+
+
+?>

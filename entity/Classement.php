@@ -12,8 +12,8 @@ class Classement
 
     private $classNm;
 
-    private $class
+    private $class;
 
-    pr
+
 
 }

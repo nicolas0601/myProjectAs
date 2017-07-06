@@ -1,42 +1,6 @@
+
+
 <?php
-
-//$reqMatch = $pdo->prepare("SELECT DISTINCT renc_equipe_a as equipeA, renc_equipe_b as equipeB, renc_resultat_a as butDo, renc_resultat_b as butEx,
-//                            renc_date_rencontre as dateMatch
-//                            FROM rencontre r
-//                            INNER JOIN membre m ON m.identifiant = r.renc_equipe_a
-//                            WHERE m.identifiant = ?
-//                            ORDER BY renc_date_rencontre
-//                            ");
-////INNER JOIN membre me ON me.identifiant = r.renc_equipe_b
-//
-//$reqMatch->bindParam(1, $equipeId1);
-//
-//$reqMatch->execute();
-//
-//$matchEq = $reqMatch->fetchAll();
-//
-//$reqMatch->bindParam(1, $equipeId2);
-//$reqMatch->execute();
-//
-//$matchEq = $reqMatch->fetchAll();
-//
-//echo "<pre>";
-//var_dump($matchEq);
-//echo "</pre>";
-//$reqMatch->closeCursor();
-////    $reqTwo->execute();
-////
-////    $classementTwo = $reqTwo->fetchAll(PDO::FETCH_ASSOC);
-//
-////var_dump('<pre>');
-////var_dump($classementTwo);
-////var_dump('</pre>');
-//
-////    $jsonClass = json_encode($classementTwo);
-///*var_dump('<pre>');
-//var_dump($jsonClass);
-//var_dump('</pre>');*/
-
 
 $reqMaxJr = $db->prepare("SELECT DISTINCT MAX(class_nm)
               FROM classement

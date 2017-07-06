@@ -1,12 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: PC Dell
- * Date: 21/06/2017
- * Time: 09:29
- */
-class Membre
+
+class MembreDTO
 {
     private $identifiant;
 
@@ -25,10 +20,15 @@ class Membre
     private $pays_departement;
 
     private $sport;
+
     private $sport_id;
+
     private $img_id_profile;
+
     private $tel_fix;
+
     private $tel_mobile;
+
     private $sport_mecanique;
 
     private $categorie;
@@ -272,10 +272,6 @@ class Membre
     {
         $this->categorie = $categorie;
     }
-
-
-
-
 
 
 }
