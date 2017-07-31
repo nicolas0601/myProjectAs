@@ -65,9 +65,9 @@ $reqMatch->execute();
 
 $matchEq = $reqMatch->fetchAll();
 
-echo "<pre>";
-var_dump($matchEq);
-echo "</pre>";
+//echo "<pre>";
+////var_dump($matchEq);
+//echo "</pre>";
 $reqMatch->closeCursor();
 //    $reqTwo->execute();
 //
@@ -83,7 +83,7 @@ $reqMatch->closeCursor();
     var_dump('</pre>');*/
 
 ?>
-
+<div class="pageMargin">
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -139,7 +139,7 @@ $reqMatch->closeCursor();
             </tbody>
         </table>
     </div>
-
+</div>
 
 
 

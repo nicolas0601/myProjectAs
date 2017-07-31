@@ -1,129 +1,255 @@
 <?php
-//
-////include('Model/connexionDB.php');
-////
-////session_start();
-////
-////if (empty($_POST['mail'])
-////    || empty($_POST['pwd'])
-////) {
-////    $_SESSION['message'] = "Tous les champs sont obligatoires !";
-////
-////    header('Location: login.php');
-////    exit();
-////}
-////
-////
-////
-//////try {
-//////    $pdo = new PDO($pdo, $params['login'], $params['pwd']);
-//////    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//////} catch (PDOException $e) {
-//////    echo $e->getMessage();
-//////}
-////
-////
-////$stmt = $pdo->prepare("SELECT * FROM membre WHERE mail = :email");
-////$stmt->bindParam(':email', $mail);
-////
-////$mail = $_POST['mail'];
-////
-////try {
-////    $stmt->execute();
-////} catch (PDOException $e) {
-////    $_SESSION['message'] = "Unexpected error occurred !";
-////    header('Location: login.php');
-////    die;
-////}
-////
-////$user = null;
-////
-////while ($row = $stmt->fetch()) {
-////    if($row['mPasse'] === $_POST['pwd']) {
-////        $user = $row;
-////    }
-////}
-////
-////if(!empty($user)) {
-////    $user['pwd'] = null;
-////
-////    $_SESSION['user'] = $user;
-////
-////    header("Location: index.php");
-////} else {
-////    $_SESSION['message'] = "Bad credentials !";
-////    header('Location: login.php');
-////}
-//
-////requête transaction
-//
-//
-//?>
-<!--<!DOCTYPE html>-->
-<!--<html lang="fr">-->
-<!---->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <title>--><?php //echo $page_title; ?><!--</title>-->
-<!---->
-<!--    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">-->
-<!--    <link rel="stylesheet" href="public/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="public/css/font-awesome.min.css">-->
-<!--    <link rel="stylesheet" href="public/css/ie10-viewport-bug-workaround.css">-->
-<!--    <link rel="stylesheet" href="public/css/styles.css">-->
-<!--    <link rel="stylesheet" href="public/css/faceAFace.css">-->
-<!--    <link rel="stylesheet" href="public/css/etatDeForme.css">-->
-<!---->
-<!---->
-<!--</head>-->
-<!--<body>-->
+
+include('view/layout/header.php');
+
+if (isset($_SESSION)) {
+//    pre($_SESSION);
+    $user = $_SESSION['user'];
+} else {
+    header('Location: login.php');
+    exit;
+}
+
+
+?>
+
+
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Yes !</strong> Vous etes bien connecté
+</div>
+<div class="box">
+
+    <div class="profil"><h3>Mon Profile</h3></div>
+
+    <div class="floatLeft">
+
+
+        <h6>Civilité: <?= $user['civilite'] ?></h6>
+
+        <br><br>
+
+        <h6> Nom Complet: <?= $user["nom"] ?></h6>
+
+        <!--                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
+        <br><br>
+        <h6> Email: <?= $user["mail"] ?></h6>
+
+        <br><br>
+
+        <h6> Date de Naissance: <?= $user["dateN"] ?></h6>
+
+
+    </div>
+
+
+    <div id="floatRight">
+
+        <form action="./controller/MembreController.php" method="post" class="form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">Civilité</label>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <label class="radio-inline">
+                                <input type="radio" id="femaleRadio" value="Mme" name="civilite"
+                                    <?= ($user['civilite'] === 'Mme') ? 'checked' : ''; ?>
+                                >Madame
+                            </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="radio-inline">
+                                <input type="radio" id="maleRadio" value="Mlle" name="civilite"
+                                    <?= ($user['civilite'] === 'Mlle') ? 'checked' : ''; ?>
+                                >Mademoiselle
+                            </label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" id="uncknownRadio" value="Mr" name="civilite"
+                                    <?= ($user['civilite'] === 'Mr') ? 'checked' : ''; ?>
+                                >Monsieur
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="firstName" class="col-sm-3 control-label">Nom Complet</label>
+                <div class="col-sm-9">
+                    <input type="text" name="nom" id="firstName" placeholder="Nom Comple" class="form-control"
+                           value= <?= $user["nom"] ?> required autofocus>
+                    <!--                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" name="mail" id="mail" placeholder="mail" class="form-control"
+                           value= <?= $user["mail"] ?> required>
+                </div>
+            </div>
+            <!--        <div class="form-group">-->
+            <!--            <label for="password" class="col-sm-3 control-label">Date de Naissances</label>-->
+            <!--            <div class="col-sm-9">-->
+            <!--                <input type="date" name="birthDate" id="password" placeholder="Date de Naissances" class="form-control" required>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <div class="form-group">
+                <label for="birthDate" class="col-sm-3 control-label">Date de Naissance</label>
+                <div class="col-sm-9">
+                    <input type="date" name="dateN" id="birthDate" class="form-control"
+                           value= <?= $user["dateN"] ?> required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12 ">
+                    <input type="hidden" name="identifiant" value= <?= $_SESSION["identifiant"] ?>>
+                    <!--                    <input type="hidden" name="action" value="updateProfile">-->
+                    <button type="submit" name="updateProfile" class="btn btn-primary btn-block">Mettre à jour
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    <div id="btnModi">
+        <button class="btn-warning" onclick="myFunction()">Modifié?</button>
+    </div>
+</div>
+
+<div class="box">
+
+    <div class="floatLeft">
+
+
+        <h6>Portable : <?= $user['tel_mobile'] ?></h6>
+
+        <br><br>
+
+        <h6>Département: <?= $user["pays_departement"] ?></h6>
+
+        <!--                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
+        <br><br>
+        <h6> Ville: <?= $user["mail"] ?></h6>
+
+        <br><br>
+
+        <h6>Sport favoris: <?= $user["dateN"] ?></h6>
+
+
+    </div>
+
+
+    <div id="floatRight">
+
+        <form action="./controller/MembreController.php" method="post" class="form-horizontal">
+
+            <div class="form-group">
+                <label for="tel_mobile" class="col-sm-3 control-label">Portable</label>
+                <div class="col-sm-9">
+                    <input type="text" name="tel_mobile" id="tel_mobile" class="form-control"
+                           value= <?= $user["tel_mobile"] ?> required>
+
+                    <!--                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
+                </div>
+            </div>
+                        <div class="form-group">
+                            <label for="pays_departement" class="col-sm-3 control-label">Département</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="pays_departement" id="pays_departement" class="form-control"
+                                       value= <?= $user["pays_departement"] ?> required>
+                            </div>
+                       </div>
+            <!--                <div class="form-group">-->
+            <!--               <label for="password" class="col-sm-3 control-label">Date de Naissances</label>-->
+            <!--                     <div class="col-sm-9">-->
+            <!--                      <input type="date" name="birthDate" id="password" placeholder="Date de Naissances" class="form-control" required>-->
+            <!--                      </div>-->
+            <!--                </div>-->
+            <!--           <div class="form-group">-->
+            <!--             <label for="ville" class="col-sm-3 control-label">Ville</label>-->-->
+            <!--               <div class="col-sm-9">-->
+            <!--                   <input type="text" name="ville" id="ville" class="form-control">-->
+            <!--                          value= "">-->
+            <!--              </div>-->
+            <!--          </div>-->
+            <!---->
+            <!--           <div class="form-group">-->
+            <!--              <label for="sport" class="col-sm-3 control-label">Sport favoris</label>-->
+            <!--              <div class="col-sm-9">-->
+            <!--                 <input type="text" name="sport" id="sport" class="form-control"-->
+            <!--                           value= "">-->
+            <!--               </div>-->
+            <!--          </div>-->
+
+            <div class="form-group">
+                <div class="col-sm-12 ">
+                    <input type="hidden" name="identifiant" value= <?= $_SESSION["identifiant"] ?>>
+                    <input type="hidden" name="action" value="updateProfile">
+                    <button type="submit" name="updateProfile" class="btn btn-primary btn-block">Mettre à jour
+                    </button>
+                </div>
+
+
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById('floatRight');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+</script>
+
+
 <?php
-//include('view/layout/header.php');
-//
-//
-//
-//
-//
-//echo "<div id=\"body\">";
-//
-//
-//
-//if(isset($_POST['tran_code']) && $_POST['tran_code']!='') {
-//
-////    var_dump($_POST['tran_code']);
-//    $transaction = $_POST['tran_code'];
-//    $req_tran = $db->prepare("SELECT DISTINCT tran_id, tran_page, tran_dossier
-//              FROM transaction
-//              WHERE tran_code = '$transaction'");
-//    $req_tran->execute();
-//    $tab_tran = $req_tran->fetchAll();
-//    $fichier = $tab_tran[0][2]."/".$tab_tran[0][1];
-//
-//    //var_dump($req_tran);
-//    include($fichier);
-//}
-//else
-//{
-//    include 'view/membre/connexion.php';
-//
-//}
-//
-//echo "</div>";
-//
-//
-//include('view/layout/footer.php')
-//
-//?>
-<!---->
-<!--<script src="public/js/jquery.min.js"></script>-->
-<!--<script src="public/js/d3.js"></script>-->
-<!--<script src="public/js/bootstrap.min.js"></script>-->
-<!--<script src="public/js/ie10-viewport-bug-workaround.js"></script>-->
-<!--<script src="public/js/courbeClass.js"></script>-->
-<!--<script src="public/js/etatDeForme.js"></script>-->
-<!--</body>-->
-<!--</html>-->
-<!---->
-<!---->
+
+include('view/layout/footer.php');
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

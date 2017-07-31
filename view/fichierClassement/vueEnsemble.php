@@ -1,5 +1,3 @@
-
-
 <?php
 
 $reqMaxJr = $db->prepare("SELECT DISTINCT MAX(class_nm)
@@ -73,86 +71,28 @@ echo "<script> var dataForm = $donnee </script>";
 
 
 ?>
-
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <TR>
-            <TD colspan=9 align="center">LIGUE 1</TD>
-        </TR>
-        <tr>
-            <th>POS</th>
-            <th>Equipe</th>
-            <th>J</th>
-            <th>V</th>
-            <th>N</th>
-            <th>D</th>
-            <th>Buts</th>
-            <th>DF</th>
-            <th>POINTS</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($classements as $classement): ?>
-            <tr>
-                <td>
-                    <p><?= $classement['rang'] ?></p>
-
-                </td>
-                <td>
-                    <p><?= $classement['equipe'] ?></p>
-
-                </td>
-                <td>
-                    <p><?= strtoupper($classement['journee']) ?></p>
-                </td>
-
-                <td>
-                    <p><?= $classement['V'] ?></p>
-                </td>
-                <td>
-                    <p><?= $classement['N'] ?></p>
-                </td>
-                <td>
-                    <p><?= $classement['D'] ?></p>
-                </td>
-                <td>
-                    <p><?= $classement['buts'] ?>: <?= $classement['be'] ?></p>
-                </td>
-                <td>
-                    <p><?= $classement['df'] ?></p>
-                </td>
-                <td>
-                    <p><?= $classement['point'] ?></p>
-                </td>
-
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
-
-<div id="etatForm">
-
+<div class="pageMargin">
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
             <TR>
-                <TD colspan=6 align="center">ETAT DE FORME</TD>
+                <TD colspan=9 align="center">LIGUE 1</TD>
             </TR>
             <tr>
                 <th>POS</th>
                 <th>Equipe</th>
+                <th>J</th>
+                <th>V</th>
+                <th>N</th>
+                <th>D</th>
+                <th>Buts</th>
+                <th>DF</th>
                 <th>POINTS</th>
-                <th><span style=" color:green ">V% </span> <span style="color:yellow">N% </span>
-                    <span style=" color:red">D% </span></th>
 
             </tr>
             </thead>
-            <tbody class="forme">
-            <?php foreach ($reqEtatDeForme as $classement): ?>
+            <tbody>
+            <?php foreach ($classements as $classement): ?>
                 <tr>
                     <td>
                         <p><?= $classement['rang'] ?></p>
@@ -163,24 +103,27 @@ echo "<script> var dataForm = $donnee </script>";
 
                     </td>
                     <td>
-                        <div class="point">
-
-
-                        </div>
-
+                        <p><?= strtoupper($classement['journee']) ?></p>
                     </td>
-
-
 
                     <td>
-                        <div class="vnd">
-
-
-                        </div>
-
-
+                        <p><?= $classement['V'] ?></p>
                     </td>
-
+                    <td>
+                        <p><?= $classement['N'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $classement['D'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $classement['buts'] ?>: <?= $classement['be'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $classement['df'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $classement['point'] ?></p>
+                    </td>
 
                 </tr>
             <?php endforeach; ?>
@@ -188,11 +131,65 @@ echo "<script> var dataForm = $donnee </script>";
         </table>
     </div>
 
-</div>
 
-<div class="mainSvg">
+    <div id="etatForm">
 
-    <div class="vnd2"></div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <TR>
+                    <TD colspan=6 align="center">ETAT DE FORME</TD>
+                </TR>
+                <tr>
+                    <th>POS</th>
+                    <th>Equipe</th>
+                    <th>POINTS</th>
+                    <th><span style=" color:green ">V% </span> <span style="color:yellow">N% </span>
+                        <span style=" color:red">D% </span></th>
+
+                </tr>
+                </thead>
+                <tbody class="forme">
+                <?php foreach ($reqEtatDeForme as $classement): ?>
+                    <tr>
+                        <td>
+                            <p><?= $classement['rang'] ?></p>
+
+                        </td>
+                        <td>
+                            <p><?= $classement['equipe'] ?></p>
+
+                        </td>
+                        <td>
+                            <div class="point">
+
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <div class="vnd">
+
+
+                            </div>
+
+
+                        </td>
+
+
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!---->
+    <!--<div class="mainSvg">-->
+    <!---->
+    <!--    <div class="vnd2"></div>-->
 
 </div>
 

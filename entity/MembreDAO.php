@@ -47,7 +47,8 @@ function userUpdate($params)
     $bd = getbdd();
 
     $sql = "UPDATE membre SET civilite=:civilite, nom=:nom, mail=:mail,
-                              dateN=:dateN, tel_mobile=:tel_mobile
+                    dateN=:dateN, tel_mobile=:tel_mobile,
+                      pays_id=:pays_id
                 WHERE identifiant =:identifiant";
 
         try {
@@ -128,7 +129,8 @@ function userUpdate($params)
 
         try {
             $db = getbdd();
-            $stmt = $db->prepare("SELECT civilite, nom, mail, dateN FROM membre WHERE identifiant=:membreId");
+            $stmt = $db->prepare("SELECT civilite, nom, mail, dateN, tel_mobile,
+  pays_departement, pays_nom_departement, pays_nom_ville  FROM membre m INNER JOIN pays ON m.pays_id = pays.pays_id   WHERE identifiant=:membreId");
             $stmt->bindParam("membreId", $membreId, PDO::PARAM_INT);
             $stmt->execute();
             $data = $stmt->fetch(PDO::FETCH_ASSOC); //User data
@@ -137,6 +139,7 @@ function userUpdate($params)
             $_SESSION['message'] = $e;
         }
     }
+
 
 
     function logout()

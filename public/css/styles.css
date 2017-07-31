@@ -1,23 +1,32 @@
 
 body {
-
+    /*width: 100%;*/
     padding-top: 0;
+    /*margin: 0;*/
     padding-bottom: 20px;
-    background-color: white;
+    background-color: whitesmoke;
+    /*min-height: 80vh;*/
 }
 
 /*HEADER CSS*/
+header{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
 
 #accueilHeader{
     background-color: #008080;
-
+    height: 105px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /*width: 100%;*/
 }
 
 
-.container{
-    height: 100px
 
-}
 
 .navbar-right{
     margin-right: 10px;
@@ -26,18 +35,61 @@ body {
 
 #logo{
     width: 100px;
-    margin-top:30px;
+    margin-top:20px;
 }
 
+#menuLogo{
+position: relative;
+    top:60px;
+display: inline;
+    float: none;
+}
+
+#slogan{
+
+}
+
+#menuLogo a:hover{
+    color: dodgerblue;
+    text-shadow: 1px 1px 1px #000;
+
+}
+
+.navigbar li {
+    display: inline-block;
+
+}
+.navigbar ul li {
+     display : inline;
+     padding : 0 0.5em;/* Pour espacer les boutons entre eux */
+
+ }
+.navigbar li a {
+       width:30px;
+       height:30px;
+
+       color:white;
+
+   }
+
+
+#menu_horizontal li a img{
+    width:15px;
+    height:15px;
+    margin-bottom: 35px;
+    color:white;
+
+}
 /*ID BODY CSS*/
 
 #body{
-    width: 1200px;
-    position: relative;
+    width: auto;
+    /*position: relative;*/
     margin: 0 auto;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     padding-bottom:100px;
-    background-color: white;
+    background-color:whitesmoke;
+    overflow: scroll;
 
 }
 
@@ -80,9 +132,11 @@ ul .navbar-nav{
 /*FOOTER CSS*/
 
 /*footer {*/
+    /*!*box-sizing: border-box;*!*/
 /*position: absolute;*/
-/*height: 500px;*/
+/*height: 100px;*/
 /*background-color: #f7f904;*/
+    /*width: 100px;*/
 /*}*/
 
 
@@ -92,19 +146,20 @@ footer p {
 }
 
 footer p a{
+
     margin-left: 20px;
     text-align: center;
-    color:white;
+    color:dodgerblue;
 }
 
 footer .navbar-fixed-bottom {
     text-align: center;
-    height: 100px;
+    height: auto;
     background-color: #008080;
 }
 
 .reseauSocial {
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .reseauSocial>p {
@@ -131,19 +186,24 @@ footer .navbar-fixed-bottom {
 
 /*LOGIN CSS*/
 .wrapper {
-
-    background-color: white;
-
+    text-align: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    background-color: whitesmoke;
     margin-top: 20px;
     margin-bottom: 20px;
+
 }
 
 .form-signin {
+
     width: 500px;
-    padding: 15px 35px 45px;
+    padding: 15px 35px ;
     margin: 0 auto;
-    background-color: #008080;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color:whitesmoke;
+    border: none;
 }
 .form-signin-heading,
 .checkbox {
@@ -178,32 +238,40 @@ input[type="password"] {
 
 /*  PROFIL CSS*/
 
-.box{
-    background-color: #008080;
-    width:700px;
-    margin:0 auto;
-    height:400px;
-    margin-bottom: 10px;
+#conteneur{
+
+    display: flex;
+    justify-content: center;
+    background-color:whitesmoke;
+    /*width:700px;*/
+    /*margin:0 auto;*/
+    /*height:800px;*/
+    /*margin-bottom: 10px;*/
 }
 
 .floatLeft{
     width:300px;
-    padding: 15px;
+
     margin: 0 auto;
+    /*margin-bottom: 150px;*/
     background-color: #008080;
     border-radius: 0.3em;
-    float: left;
+/*padding-right: 10px ;*/
+    /*float: left;*/
     /*display: inline-block;*/
 }
 
-#floatRight{
+.flex-item{
     width:400px;
-    padding: 15px;
-    margin: 0 auto;
+    align-items: center;
+    margin: 10px;
+    /*margin-bottom: 150px;*/
+    padding: 10px;
+    text-align: center;
     background-color: #008080;
     border-radius: 0.3em;
 
-    float: right;
+    /*float: right;*/
 }
 
 
@@ -213,7 +281,25 @@ input[type="password"] {
     text-align: center
 }
 
+
+#formProfile{
+
+    display: none;
+}
+
+
 #btnModi{
 
-    float: right;
+
+}
+
+h6{
+    display: inline;
+}
+
+/*css page vue D'ENSEMBLE*/
+
+.pageMargin{
+
+    margin: 10px 10px 10px 10px;
 }

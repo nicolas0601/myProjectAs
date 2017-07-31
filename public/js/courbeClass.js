@@ -1,5 +1,3 @@
-// graph ligne ok
-
 var journe1 = journee; //38
 var titre1 = "Comparaison de classement";
 var dataEq1 = dataGraph; // 3 data
@@ -126,8 +124,8 @@ function graphCLassement(data, titre, height, width, journe, dataEq, nbrEquipe) 
         .attr("x", (width / 2))
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .style("fill", "blue")
+        .style("font-size", "20px")
+        .style("fill", " #FFCB1A")
         .style("text-decoration", "underline")
         .text(titre);
 
@@ -174,7 +172,7 @@ function graphCLassement(data, titre, height, width, journe, dataEq, nbrEquipe) 
 
     mouseG.append('rect') // append a rect to catch mouse movements on canvas
         .data(dataEq)
-        .attr('width', width) // can't catch mouse events on a g element
+        .attr('width', width)
         .attr('height', height)
         .attr('fill', 'none')
         .attr('pointer-events', 'all')
@@ -230,19 +228,6 @@ function graphCLassement(data, titre, height, width, journe, dataEq, nbrEquipe) 
 
             d3.selectAll(".mouse-per-line")
                 .attr("transform", function (d, i) {
-                    // console.log(width / mouse[0]);
-
-                    // console.log(xScale.invert(mouse[0]));
-
-                    // var xJournee = xScale.invert(mouse[0]), // it works
-                    //     bisectClass = d3.bisector(function (d) {
-                    //         return d.journee;
-                    //     }).right; // ??
-                    // idx = bisectClass(d.journee); //??
-
-
-                    // d2 = dataEq[j - 1];
-                    //     d4 = dataEq[j];
 
                     var beginning = 0,
                         end = lines[i].getTotalLength(),
@@ -269,26 +254,3 @@ function graphCLassement(data, titre, height, width, journe, dataEq, nbrEquipe) 
 
         });
 }
-
-// var bisectClass = d3.bisector(function(d) { return d.journee; }).left;
-// var bisectClassTou = d3.bisector(function(d) { return d.journee; }).left;
-
-//
-//
-// function mousemove(x1, x2, y1, y2) {
-//
-//     var mouse = d3.mouse(this);
-//     var xEq1 = xScale.invert(mouse[0]);
-//         i = bisectClass(dataEq, xEq1);
-//         d0 = dataEq[i - 1];
-//         d1 = dataEq[i];
-//         //data la plus proche ddu cursor
-//          d = xEq1 - x1 > x2 - xEq1 ? d1 : d0;
-//
-//      focus.attr("transform", "translate(" + xScale(d.journee) + "," + yScale(d.rang_eq1) + ")");
-//      focus.select("text").text(d.rang_eq1);
-// }
-//
-
-
-

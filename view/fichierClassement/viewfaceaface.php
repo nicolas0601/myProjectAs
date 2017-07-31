@@ -54,7 +54,7 @@ $reqLastFive->bindParam(1, $equipeId1);
 $reqLastFive->bindParam(2, $equipeId1);
 
 $reqLastFive->execute();
-
+var_dump($reqLastFive);
 $reqLastFive1 = $reqLastFive->fetchAll();
 //
 //echo "<pre>";
@@ -155,101 +155,97 @@ echo "<script> var dataGraph = $donnee </script>";
 
 
 //?>
+<div id="faceAFace">
+    <div class="pageMargin">
+        <div class="match">
+            <form>
+                <select name="equipe">
+                    <?php foreach ($matchEq1 as $match): ?>
+                        <option><?= $match['equipeA'] ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
 
 
-<div class="match">
-    <form>
-        <select name="equipe">
-            <?php foreach ($matchEq1 as $match): ?>
-                <option><?= $match['equipeA'] ?> </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
-
-
-    <ul class="list-group">
-        <?php foreach ($matchEq1 as $match): ?>
-            <li class="list-group-item list-group-item-success"><?= $match['butDo'] ?> :<?= $match['butEx'] ?> </li>
-
-            <!--        <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>-->
-            <!--        <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>-->
-            <!--        <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>-->
-        <?php endforeach; ?>
-    </ul>
-    <div class="equipeB">
-        <form>
-            <select name="equipe">
+            <ul class="list-group">
                 <?php foreach ($matchEq1 as $match): ?>
-                    <option><?= $match['equipeB'] ?> </option>
+                    <li class="list-group-item list-group-item-success"><?= $match['butDo'] ?>
+                        :<?= $match['butEx'] ?> </li>
+
+                    <!--        <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>-->
+                    <!--        <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>-->
+                    <!--        <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>-->
                 <?php endforeach; ?>
-            </select>
-        </form>
+            </ul>
+            <div class="equipeB">
+                <form>
+                    <select name="equipe">
+                        <?php foreach ($matchEq1 as $match): ?>
+                            <option><?= $match['equipeB'] ?> </option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
 
 
+            </div>
+        </div>
 
+        <div id="squareMatch">
+            <h4>Les cinq dernières rencontres</h4>
+            <div class="squareEq1">
+
+                <p> Performance<?php foreach ($reqLastFive1 as $five1): ?>
+                        <?php if ($five1['butDo'] > $five1['butEx'] && $five1['renc_equipe_a'] = $equipeId1) {
+                            echo "<span style='background-color:green;'>V</span>";
+
+
+                        } else if ($five1['butDo'] = $five1['butEx']) {
+                            echo "<span style='background-color:yellow;'>N</span>";
+
+
+                        } else if ($five1['butDo'] < $five1['butEx']) {
+                            echo "<span style='background-color:red;'>D</span>";
+
+
+                        }
+
+                        ?>
+                    <?php endforeach; ?>
+
+
+                </p>
+
+            </div>
+
+            <div class="squareEq2">
+
+                <p> Performance<?php foreach ($reqLastFive2 as $five2): ?>
+                        <?php if ($five2['butDo'] > $five2['butEx'] && $five2['equipeA'] = $equipeId2) {
+                            echo "<span style='background-color:green;'>V</span>";
+
+
+                        } else if ($five2['butDo'] = $five2['butEx']) {
+                            echo "<span style='background-color:yellow;'>N</span>";
+
+
+                        } else if ($five2['butDo'] < $five2['butEx'] && $five2['equipeA'] = $equipeId2) {
+                            echo "<span style='background-color:red;'>D</span>";
+
+                        }
+
+                        ?>
+                    <?php endforeach; ?>
+
+
+                </p>
+
+            </div>
+        </div>
+        <div class="data">
+
+
+        </div>
     </div>
 </div>
-
-<div id="squareMatch">
-<h4>Les cinq dernières rencontres</h4>
-    <div class="squareEq1">
-
-        <p> Performance<?php foreach ($reqLastFive1 as $five1): ?>
-                <?php if ($five1['butDo'] > $five1['butEx'] && $five1['renc_equipe_a']= $equipeId1){
-                    echo "<span style='background-color:green;'>V</span>";
-
-
-
-                } else if ($five1['butDo'] = $five1['butEx']) {
-                    echo "<span style='background-color:yellow;'>N</span>";
-
-
-
-                } else if ($five1['butDo'] < $five1['butEx'] ){
-                    echo "<span style='background-color:red;'>D</span>";
-
-
-                }
-
-                ?>
-            <?php endforeach; ?>
-
-
-        </p>
-
-    </div>
-
-    <div class="squareEq2">
-
-        <p> Performance<?php foreach ($reqLastFive2 as $five2): ?>
-                <?php if ($five2['butDo'] > $five2['butEx'] && $five2['equipeA']= $equipeId2) {
-                    echo "<span style='background-color:green;'>V</span>";
-
-
-
-                } else if ($five2['butDo'] = $five2['butEx']) {
-                    echo "<span style='background-color:yellow;'>N</span>";
-
-
-
-                }  else if ($five2['butDo'] < $five2['butEx'] && $five2['equipeA']= $equipeId2) {
-                    echo "<span style='background-color:red;'>D</span>";
-
-                }
-
-                ?>
-            <?php endforeach; ?>
-
-
-        </p>
-
-    </div>
-</div>
-    <div class="data">
-
-
-    </div>
-
-
 
 

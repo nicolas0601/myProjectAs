@@ -12,7 +12,7 @@
         <div class="reseauSocial">
             <p>
 
-                - Asmoza
+                - Asmoza - La communauté des parieurs
                 - Tout droits réservés
             </p>
         </div>
@@ -22,6 +22,8 @@
                 <a href="https://www.facebook.com/asmoza.sas/" target="_blank"><i class="fa fa-facebook"></i></a>
 
                 <a href="https://www.linkedin.com/company/asmoza.sas" target="_blank"><i class="fa fa-linkedin"></i></a>
+
+                <a href="" target="_blank"><i class="fa fa-twitter"></i></a>
 
             </p>
         </div>
