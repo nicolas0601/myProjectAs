@@ -129,6 +129,9 @@ session_start();
     <div id="body">
 
 <?php
+
+
+
 if (isset($_SESSION['message']) And isset( $_SESSION['identifiant']) ) {
     echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
     unset($_SESSION['message']);
@@ -139,14 +142,15 @@ if (isset($_SESSION['message']) And isset( $_SESSION['identifiant']) ) {
 //    echo "<div class='alert alert-danger'>" . $_SESSION['message'] . "</div>";
 //}
 
-else if (isset($_SESSION['message']) And isset( $_SESSION['user']) ) {
+else if (isset($_SESSION['message']) && isset( $_SESSION['user']) ) {
     echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
     unset($_SESSION['message']);
 
 }
 
-else {
+else  if (isset($_SESSION['message']) ) {
     echo "<div class='alert alert-danger'>" . $_SESSION['message'] . "</div>";
+
     unset($_SESSION['message']);
 
 }

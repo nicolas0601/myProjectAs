@@ -1,10 +1,10 @@
 <?php
 
-function  pre($var){
-    echo"<pre>";
-    var_dump($var);
-    echo"</pre>";
-}
+//function  pre($var){
+//    echo"<pre>";
+//    var_dump($var);
+//    echo"</pre>";
+//}
 
 require_once('../connectionDB/ConnectionDB.php');
 //require_once('MembreDTO.php');

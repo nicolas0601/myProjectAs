@@ -1,5 +1,10 @@
 <?php
 
+function  pre($var){
+    echo"<pre>";
+    var_dump($var);
+    echo"</pre>";
+}
 
 include('view/layout/header.php');
 
