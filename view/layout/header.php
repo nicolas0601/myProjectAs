@@ -34,7 +34,7 @@ session_start();
                     <img class=img-responsive src="./public/images/logoasmoza.png">
                 </div>
 
-                <div class="col-sm-4" id="slogan">
+                <div class="col-sm-3" id="slogan">
                     <p>Savoir, c'est pouvoir!</p>
                 </div>
                 <?php
@@ -88,6 +88,16 @@ session_start();
                                     <i class=\"fa fa-comment\"></i>Discussion
                                     </a></li>
                                     
+                                    
+                                <li>  <form id=\"hide\" action=\"./controller/MembreController.php\" method=\"POST\" name=\"profile\">
+                         <input type=\"hidden\" name=\"action\" value=\"toProfile\">
+                      
+                         
+                       <a href=\"\" type=\"submit\" name=\"profile\" onclick=\"document.getElementById('hide').submit()\"><i class=\"fa fa-user\"></i> Profile</a>
+                         </form>
+                   </li>
+                    
+                                    
                                     </ul>
                                     </div>";
 
@@ -109,6 +119,7 @@ session_start();
                 }
                 ?>
             </div>
+
 <!--        </div>-->
 
 
@@ -118,8 +129,27 @@ session_start();
     <div id="body">
 
 <?php
-if (isset($_SESSION['message'])) {
-    echo "<div>" . $_SESSION['message'] . "</div>";
+if (isset($_SESSION['message']) And isset( $_SESSION['identifiant']) ) {
+    echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
     unset($_SESSION['message']);
+
 }
+
+//else{
+//    echo "<div class='alert alert-danger'>" . $_SESSION['message'] . "</div>";
+//}
+
+else if (isset($_SESSION['message']) And isset( $_SESSION['user']) ) {
+    echo "<div class='alert alert-success'>" . $_SESSION['message'] . "</div>";
+    unset($_SESSION['message']);
+
+}
+
+else {
+    echo "<div class='alert alert-danger'>" . $_SESSION['message'] . "</div>";
+    unset($_SESSION['message']);
+
+}
+
+
 ?>

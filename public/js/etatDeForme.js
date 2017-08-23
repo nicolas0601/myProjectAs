@@ -3,6 +3,10 @@
  */
 var etatDeForme = dataForm;
 
+function getPercentage(number, total){
+    return number / total * 100;
+}
+
 
 //
 // d3.select(".point")
@@ -18,6 +22,10 @@ bar = d3.selectAll(".point")
     .attr("width", 300)
     .attr("height", 15)
     .append("g");
+
+var tooltipPoint = d3.select("body").append("div")
+    .attr("class", "tooltipPoint")
+    .style("opacity", 0);
 
 
 etatDeForme.forEach(function (d) {
@@ -37,7 +45,22 @@ etatDeForme.forEach(function (d) {
 
             return (d.point * 5) +"px"; })
 
-        .style("fill", "red");
+        .style("fill", "red")
+        .on('mouseover', function (d) { // on mouse in show line, circles and text
+
+        tooltipPoint.transition()
+            .style("opacity", .9);
+
+//ttotil appear on mouseover with number of points
+        tooltipPoint.html(  d.point + " points")
+            .style("left", (d3.event.pageX) + "px")   // d3.event.pageX : x coordinate of the page
+            .style("top", (d3.event.pageY - 28) + "px");//position div par rappor a la souris
+
+    })
+        .on('mouseout', function () { // on mouse out hide line, circles and text
+            tooltipPoint.transition()
+                .style("opacity", 0);
+        });
 
 
 
@@ -47,11 +70,11 @@ etatDeForme.forEach(function (d) {
 
         .attr("class", "label")
         //y position of the label is halfway down the bar
-            //x position is 3 pixels to the right of the bar
+        //x position is 3 pixels to the right of the bar
 
         .text(function (d) {
             return d.point;
-            })
+        })
         .style("fill", "blue");
 
 
@@ -103,14 +126,20 @@ vnd = d3.selectAll(".vnd")
     .attr("height", 15)
     .append("g");
 
+var tooltipPercentage = d3.select("body").append("div")
+    .attr("class", "tooltipPercentage")
+    .style("opacity", 0);
+
 etatDeForme.forEach(function (d) {
-   // analyse une chaîne de caractère fournie en argument et renvoie un entier exprimé dans une base donnée.
+    // analyse une chaîne de caractère fournie en argument et renvoie un entier exprimé dans une base donnée.
     d.d=parseInt(d.d);
     d.n=parseInt(d.n);
     d.v=parseInt(d.v);
 
+    total = d.d + d.v + d.n;
+
     xScale = d3.scaleLinear()
-        .domain([1, (d.d + d.v + d.n)])  // your data minimum and maximum
+        .domain([1, total])  // your data minimum and maximum
         .range([1, 100]);
 
     vnd.append("rect")
@@ -120,13 +149,26 @@ etatDeForme.forEach(function (d) {
         .attr("height", 15)
         .attr("width", function(d) {
 
-//5/19 pixel trop petit donc on multiplie par 100
-            console.log(d.v *100 / (d.d + d.v + d.n));
-            console.log(d.v );
-            console.log(+parseInt(d.d) + d.v + d.n);
-            // console.log(d.v / (d.d + d.v + d.n)*100);
-            return d.v / (d.d + d.v + d.n)*100 ; })
-        .style("fill", "green");
+            // console.log(d.v / (d.d + d.v + d.n)*100); // 5/19 pixel trop petit donc on multiplie par 100
+            return getPercentage(d.v, total); })
+        .style("fill", "green")
+        .attr('pointer-events', 'all')
+        .on('mouseover', function (d) { // on mouse in show line, circles and text
+
+            tooltipPercentage.transition()
+                .style("opacity", .9);
+
+            var percentage1 = getPercentage(d.v, total);
+
+            tooltipPercentage.html(  percentage1.toFixed(2) + " %")
+                .style("left", (d3.event.pageX) + "px")   // d3.event.pageX : x coordinate of the page
+                .style("top", (d3.event.pageY - 28) + "px");//position div par rappor a la souris
+
+        })
+        .on('mouseout', function () { // on mouse out hide line, circles and text
+            tooltipPercentage.transition()
+                .style("opacity", 0);
+        });
 
     vnd.append("rect")
         .data(etatDeForme)
@@ -135,8 +177,25 @@ etatDeForme.forEach(function (d) {
         })
         .attr("y", 0)
         .attr("height", 15)
-        .attr("width", function(d) { return  (d.n / (d.d + d.v + d.n))*100; })
-        .style("fill", "yellow");
+        .attr("width", function(d) { return  getPercentage(d.n, total); })
+        .style("fill", "yellow")
+        .attr('pointer-events', 'all')
+        .on('mouseover', function (d) { // on mouse in show line, circles and text
+
+            tooltipPercentage.transition()
+                .style("opacity", .9);
+
+            var percentage2 = getPercentage(d.n, total);
+
+            tooltipPercentage.html(  percentage2.toFixed(2) + " %")
+                .style("left", (d3.event.pageX) + "px")   // d3.event.pageX : x coordinate of the page
+                .style("top", (d3.event.pageY - 28) + "px");//position div par rappor a la souris
+
+        })
+        .on('mouseout', function () { // on mouse out hide line, circles and text
+            tooltipPercentage.transition()
+                .style("opacity", 0);
+        });
 
     vnd.append("rect")
         .data(etatDeForme)
@@ -145,13 +204,25 @@ etatDeForme.forEach(function (d) {
         })
         .attr("y", 0)
         .attr("height", 15)
-        .attr("width", function(d) { return (d.d / (d.d + d.v + d.n))*100; })
-        .style("fill", "red");
+        .attr("width", function(d) { return  getPercentage(d.d, total); })
+        .style("fill", "red")
+        .attr('pointer-events', 'all')
+        .on('mouseover', function (d) { // on mouse in show line, circles and text
+
+            tooltipPercentage.transition()
+                .style("opacity", .9);
+
+            var percentage3 = getPercentage(d.d, total);
+
+            tooltipPercentage.html(  percentage3.toFixed(2) + " %")
+                .style("left", (d3.event.pageX) + "px")   // d3.event.pageX : x coordinate of the page
+                .style("top", (d3.event.pageY - 28) + "px");//position div par rappor a la souris
+
+        })
+        .on('mouseout', function () { // on mouse out hide line, circles and text
+            tooltipPercentage.transition()
+                .style("opacity", 0);
+        });
 
 
 });
-
-
-
-
-

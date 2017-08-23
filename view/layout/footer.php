@@ -38,5 +38,7 @@
 <script src="public/js/ie10-viewport-bug-workaround.js"></script>
 <script src="public/js/courbeClass.js"></script>
 <script src="public/js/etatDeForme.js"></script>
+<script src="public/js/statistiqueGraph.js"></script>
+
 </body>
 </html>

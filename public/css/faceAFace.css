@@ -4,33 +4,43 @@
     margin:30px 30px 30px 30px ;
 }
 
-.data{
-    /*height:600px;*/
+
+
+#resultatEntreDeuxEq{
+    /*display: flex;                  !* establish flex container *!*/
+    /*flex-direction: row;            !* default value; can be omitted *!*/
+    /*flex-flow:row nowrap;              !* default value; can be omitted *!*/
+    /*justify-content: space-between; !* switched from default (flex-start, see below) *!*/
+    /*height:200px;*/
     /*width:900px;*/
-    /*margin-left: 20px;*/
-    background-color: #008080
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #008080;
 }
 
-.match{
+/*#resultatEntreDeuxEq > div {*/
+    /*background: #5F85DB;*/
+    /*padding: 5px;*/
+    /*color: #36ff3c;*/
+    /*font-weight: bold;*/
+    /*font-family: "Rage Italic";*/
+/*}*/
 
-    height:200px;
-    /*width:900px;*/
-    /*margin-left: 150px;*/
-    margin-bottom: 20px;
-    background-color: lightgoldenrodyellow;
+
+.equipeUn{
+    float: left;}
+
+.equipeDeux{
+
+    float: right;
 }
 
-#squareMatch{
-    background-color: #9f8fee;
-    height:50px;
-    /*width:900px;*/
-    /*margin-left: 150px;*/
-    margin-bottom: 20px;
-    margin-top: 20px;
-text-align: center;
-    position: relative;
-    /*background-color: #f7f904;*/
+.resultatCentre{
+    display: inline-block;
+}
 
+#submitFaF{
 }
 
 .list-group li{
@@ -40,12 +50,32 @@ text-align: center;
 }
 
 
+/*CSS*/
+
+#squareMatch{
+    /*color:dodgerblue;*/
+    background-color: #008080;
+    height:50px;
+    /*width:900px;*/
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+text-align: center;
+    position: relative;
+    /*background-color: #f7f904;*/
+
+}
+
+
+
+
+
 .squareEq1{
     top: 10px;
     left:10px;
     height: 30px;
     font-weight: bold;
-    background-color:#008080;
+
     width:190px;
     padding: 5px;
     text-align: center;
@@ -66,6 +96,15 @@ text-align: center;
 
 }
 
+
+/*CSS graph comparaison linéaire courbe classement */
+
+.data{
+    /*height:600px;*/
+    /*width:900px;*/
+    margin-left: 20px;
+    background-color: #008080
+}
 
 .legend {
     font-size: 16px;

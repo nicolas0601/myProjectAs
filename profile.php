@@ -11,10 +11,18 @@ if (isset($_SESSION)) {
 }
 require_once('./connectionDB/ConnectionDB.php');
 $db = getbdd();
- $allpays = $db->prepare("SELECT * from pays");
-$allpays->execute();
-$pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
-//var_dump($pays);
+$allPays = $db->prepare("SELECT * from pays");
+$allPays->execute();
+$pays = $allPays->fetchAll(PDO::FETCH_ASSOC);
+$allPays->closeCursor();
+
+$allSports = $db->prepare("SELECT * from sports");
+$allSports->execute();
+$sports = $allSports->fetchAll(PDO::FETCH_ASSOC);
+//$allSports->closeCursor();
+
+var_dump($user);
+
 
 ?>
 
@@ -32,20 +40,20 @@ $pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
     <div class="flex-item">
         <div class="profil"><h3>Mon Profile</h3></div>
 
-        Civilité :   <?= $user['civilite'] ?>
+        Civilité : <?= $user['civilite'] ?>
 
 
         <br><br>
 
-         Nom Complet :
+        Nom Complet :
         <?= $user["nom"] ?>
 
-<br><br>
-         Email :
+        <br><br>
+        Email :
         <?= $user["mail"] ?>
 
-         <br><br>
-         Date de Naissance :
+        <br><br>
+        Date de Naissance :
         <?= $user["dateN"] ?>
 
         <br><br>
@@ -57,14 +65,14 @@ $pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
         Département :
         <?= $user["pays_departement"] ?> <?= $user["pays_nom_departement"] ?>
 
-       <br><br>
-    Ville :
-       <?= $user["pays_nom_ville"] ?>
+        <br><br>
+        Ville :
+        <?= $user["pays_nom_ville"] ?>
         <br><br>
 
 
         Sport favoris :
-        <?= $user["dateN"] ?>
+        <?= $user["pays_nom_ville"] ?>
 
     </div>
 
@@ -73,6 +81,7 @@ $pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
     <div class="flex-item">
         <div class="profil"><h3>Modifié mon profil</h3></div>
         <div id="formProfile">
+
             <form action="./controller/MembreController.php" method="post" class="form-horizontal">
 
                 <div class="form-group">
@@ -144,24 +153,38 @@ $pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
                         <!--                <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
                     </div>
                 </div>
-<!--                <div class="form-group">-->
-<!--                    <label for="pays_departement" class="col-sm-4 control-label">Département</label>-->
-<!--                    <div class="col-sm-8">-->
-<!--                        <input type="number" name="pays_departement" id="pays_departement" class="form-control"-->
-<!--                               value= --><?//= $user["pays_departement"] ?><!-- required>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="form-group">-->
+                <!--                    <label for="pays_departement" class="col-sm-4 control-label">Département</label>-->
+                <!--                    <div class="col-sm-8">-->
+                <!--                        <input type="number" name="pays_departement" id="pays_departement" class="form-control"-->
+                <!--                               value= --><? //= $user["pays_departement"] ?><!-- required>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <div class="form-group">
-                    <label for="pays_id" class="col-sm-4 control-label">Pays_id</label>
+                    <label for="pays_id" class="col-sm-4 control-label">Département</label>
                     <div class="col-sm-8">
-                        <select  name="pays_id" id="pays_id" class="form-control">
+                        <select name="pays_id" id="pays_id" class="form-control">
                             <?php foreach ($pays as $p) { ?>
-                                <option value=" <?= $p["pays_id"] ?>"> <?php echo $p['pays_nom_ville']?> </option>
+                                <option value=" <?= $p["pays_id"] ?>"> <?php echo $p['pays_nom_ville'] ?> </option>
 
-                                     <?php } ?>
+                            <?php } ?>
 
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="pays_id" class="col-sm-4 control-label">Sport favoris</label>
+                    <div class="col-sm-8">
+                        <select name="sport_id" id="sport_id" class="form-control">
+                            <?php foreach ($sports as $sport) { ?>
+                                <option value=" <?= $sport["sport_id"] ?>"> <?php echo $sport['sport_nom'] ?> </option>
+
+                            <?php } ?>
+
+                        </select>
+                    </div>
+
+
                 </div>
                 <!--                        <div class="form-group">-->
                 <!--                            <label for="ville" class="col-sm-3 control-label">Ville</label>-->
@@ -195,12 +218,14 @@ $pays = $allpays->fetchAll(PDO::FETCH_ASSOC);
         <div id="btnModi">
             <button class="btn-toolbar" onclick="myFunction()">Modifié?</button>
         </div>
+        <br/>
+        <div id="RetourMenu">
+            <a href="index.php"> <button class="btn-link">Accueil</button></a>
+        </div>
     </div>
 
 
-
 </div>
-
 
 
 <script>

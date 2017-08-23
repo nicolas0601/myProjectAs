@@ -8,7 +8,12 @@ include('view/layout/header.php');
 
 <div class="wrapper">
     <form action="./controller/MembreController.php" method="post" class="form-horizontal" role="form">
-        <h3>Inscrivez-vous gratuitement</h3>
+
+
+        <h5>La commnunauté des passionnées de sports et des paris sportifs</h5>
+
+        <h5>Suivez les performances de vos équipes favorites</h5>
+        <h5>Inscrivez-vous gratuitement</h5>
 
         <div class="form-group">
             <label class="control-label col-sm-3">Civilité</label>
@@ -64,7 +69,7 @@ include('view/layout/header.php');
         <div class="form-group">
             <div class="col-sm-9 col-sm-offset-3">
 <!--                <input type="hidden" name="action" value="register">-->
-                <button type="submit" name="registration" class="btn btn-primary btn-block">Registration</button>
+                <button type="submit" name="registration" class="btn btn-primary btn-block">Inscription</button>
             </div>
         </div>
     </form>

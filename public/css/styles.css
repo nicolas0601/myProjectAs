@@ -10,7 +10,7 @@ body {
 
 /*HEADER CSS*/
 header{
-
+    width:100%;
     margin-top: 10px;
     margin-bottom: 10px;
 
@@ -19,7 +19,7 @@ header{
 
 #accueilHeader{
     background-color: #008080;
-    height: 105px;
+    height:100%;
     margin-top: 10px;
     margin-bottom: 10px;
     /*width: 100%;*/
@@ -29,26 +29,36 @@ header{
 
 
 .navbar-right{
-    margin-right: 10px;
+    margin-right: 30px;
     margin-top:40px;
 }
 
 #logo{
     width: 100px;
+    margin-left:10px;
     margin-top:20px;
 }
 
 #menuLogo{
 position: relative;
-    top:60px;
+    top:50px;
 display: inline;
     float: none;
+
+
 }
 
 #slogan{
 
 }
+#menuLogo li a{
+    font-size: 0.7em;
 
+}
+
+#menuLogo li a i{
+    font-size: 1em;
+}
 #menuLogo a:hover{
     color: dodgerblue;
     text-shadow: 1px 1px 1px #000;
@@ -61,7 +71,7 @@ display: inline;
 }
 .navigbar ul li {
      display : inline;
-     padding : 0 0.5em;/* Pour espacer les boutons entre eux */
+     padding : 0.1em;/* Pour espacer les boutons entre eux */
 
  }
 .navigbar li a {
@@ -104,6 +114,11 @@ display: inline;
 
 }
 
+.navbar-collapse ul :hover {
+    color: dodgerblue;
+
+}
+
 /*CLASSEMENT CSS PAGE CLASSEMENT*/
 
 table thead tr{
@@ -131,13 +146,14 @@ ul .navbar-nav{
 
 /*FOOTER CSS*/
 
-/*footer {*/
-    /*!*box-sizing: border-box;*!*/
+footer {
+    /*box-sizing: border-box;*/
 /*position: absolute;*/
 /*height: 100px;*/
 /*background-color: #f7f904;*/
     /*width: 100px;*/
-/*}*/
+    margin-left: 20px;
+}
 
 
 
@@ -175,7 +191,7 @@ footer .navbar-fixed-bottom {
     max-width: 530px;
     padding: 15px;
     margin: 0 auto;
-    background-color: #008080;
+    background-color: whitesmoke;
     border-radius: 0.3em;
 }
 
@@ -187,7 +203,7 @@ footer .navbar-fixed-bottom {
 /*LOGIN CSS*/
 .wrapper {
     text-align: center;
-    color: white;
+    color: #008080;
     margin-left: auto;
     margin-right: auto;
     width: 500px;
@@ -303,3 +319,27 @@ h6{
 
     margin: 10px 10px 10px 10px;
 }
+
+
+
+/*PAGE STATISTIQUE POUR LE GRAPH*/
+
+
+
+.arc text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+    color : black;
+}
+
+.arc path {
+    stroke: #fff;
+}
+
+
+.divStat{float: right}
+
+/*.slice text {*/
+    /*font-size: 16pt;*/
+    /*font-family: Arial;*/
+/*}*/
